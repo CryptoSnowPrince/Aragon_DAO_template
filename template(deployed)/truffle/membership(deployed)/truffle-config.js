@@ -1,3 +1,4 @@
+// module.exports = require('@aragon/templates-shared/truffle.js')
 /**
  * Use this file to configure your truffle project. It's seeded with some
  * common settings for different networks and features like migrations,
@@ -20,11 +21,10 @@
 
 const HDWalletProvider = require('@truffle/hdwallet-provider');
 //
-// const fs = require('fs');
-
-import {mnemonic} from "E://Profile/Wallet/memonic.js";
+const fs = require('fs');
+const mnemonic = fs.readFileSync("../../../../../Profile/Wallet/.secret").toString().trim();
 const ropsten_link = "https://eth-ropsten.alchemyapi.io/v2/VBJPfX_whqc9VbMSO3DRiBy6irhrou9e"
-
+const ropsten_wss_link = "wss://eth-ropsten.alchemyapi.io/v2/VBJPfX_whqc9VbMSO3DRiBy6irhrou9e"
 module.exports = {
   /**
    * Networks define how you connect to your ethereum client and let you set the
@@ -59,24 +59,28 @@ module.exports = {
     // },
     // Useful for deploying to a public network.
     // NB: It's important to wrap the provider as a function.
-    // ropsten: {
-    // provider: () => new HDWalletProvider(mnemonic, ropsten_link),
-    // network_id: 3,       // Ropsten's id
-    // gas: 5500000,        // Ropsten has a lower block limit than mainnet
-    // confirmations: 2,    // # of confs to wait between deployments. (default: 0)
-    // timeoutBlocks: 20000,  // # of blocks before a deployment times out  (minimum/default: 50)
-    // skipDryRun: true     // Skip dry run before migrations? (default: false for public nets )
-    // },
-    // custom+
     ropsten: {
-      // Special function to setup the provider
-      provider: function () {
-        // Setting the provider with the Infura Rinkeby address and Token
-        return new HDWalletProvider(mnemonic, ropsten_link)
-      },
-      // Network id is 3 for ropsten
-      network_id: 3
+    provider: () => new HDWalletProvider(mnemonic, ropsten_link),
+    network_id: 3,       // Ropsten's id
+    gas: 5500000,        // Ropsten has a lower block limit than mainnet
+    confirmations: 2,    // # of confs to wait between deployments. (default: 0)
+    timeoutBlocks: 20000,  // # of blocks before a deployment times out  (minimum/default: 50)
+    skipDryRun: true     // Skip dry run before migrations? (default: false for public nets )
     },
+    // custom+
+    // ropsten: {
+    //   // Special function to setup the provider
+    //   provider: function () {
+    //     // Setting the provider with the Infura Rinkeby address and Token
+    //     return new HDWalletProvider(mnemonic, ropsten_link)
+    //   },
+    //   // Network id is 3 for ropsten
+    //   network_id: 3,
+      
+    //   networkCheckTimeout: 1000000,
+    //   timeoutBlocks: 20000
+    //   skipDryRun: true     // Skip dry run before migrations? (default: false for public nets )
+    // },
     // custom-
     // Useful for private networks
     // private: {
@@ -88,7 +92,7 @@ module.exports = {
 
   // Set default mocha options here, use special reporters etc.
   mocha: {
-    // timeout: 100000
+    timeout: 1000000
   },
 
   // Configure your compilers
@@ -96,13 +100,13 @@ module.exports = {
     solc: {
       version: "0.4.24",    // Fetch exact version from solc-bin (default: truffle's version)
       // docker: true,        // Use "0.5.1" you've installed locally with docker (default: false)
-      // settings: {          // See the solidity docs for advice about optimization and evmVersion
-      //  optimizer: {
-      //    enabled: false,
-      //    runs: 200
-      //  },
-      //  evmVersion: "byzantium"
-      // }
+      settings: {          // See the solidity docs for advice about optimization and evmVersion
+       optimizer: {
+         enabled: false,
+         runs: 200
+       },
+       // evmVersion: "byzantium"
+      }
     }
   },
 

@@ -1,0 +1,1 @@
+custom \node_modules\@aragon\hardhat-config\hardhat.config.js

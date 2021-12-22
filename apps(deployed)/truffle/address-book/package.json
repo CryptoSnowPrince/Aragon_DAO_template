@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "@aragon/os": "4.3.0",
+    "@truffle/hdwallet-provider": "^2.0.0"
+  }
+}

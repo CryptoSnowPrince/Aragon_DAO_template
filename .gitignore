@@ -102,3 +102,11 @@ dist
 
 # TernJS port file
 .tern-port
+template(deployed)/truffle/reputation(deployed)/build/
+*.backup
+apps(deployed)/truffle/address-book/build/
+apps(deployed)/truffle/TimeLock/build/
+aragonOS(deployed)/build/
+template(deployed)/truffle/company(deployed)/build/
+template(deployed)/truffle/membership(deployed)/build/
+GoodDollar_node_modules_1223/
