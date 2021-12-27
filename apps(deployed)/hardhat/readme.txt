@@ -1,1 +1,1 @@
-custom \node_modules\@aragon\hardhat-config\hardhat.config.js
+customize \node_modules\@aragon\hardhat-config\hardhat.config.js
